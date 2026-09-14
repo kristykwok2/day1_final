@@ -23,3 +23,18 @@
 > OPENAI_API_KEY = "<insert>"
 
 ## Remember to resync with Github repository! 
+
+## Create some code
+1. Create a python file - call it what you want - home.py by convention (keep it simple for now, if it gets to like more than 50 lines make a new one)
+2. Run streamlit, referring to file you created
+> streamlit run bottomtext.py
+
+## Create code in your python file 
+1. Import streamlit
+> import streamlit as st
+2. Import OpenAI
+> from openai import OPENAI
+3. Import python-dotenv
+> from dotenv import load_dotenv
+4. Get all of the secrets values
+> load_dotenv()
