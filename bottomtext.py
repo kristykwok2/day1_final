@@ -11,6 +11,8 @@ if "name" not in st.session_state:
     st.session_state.name = ""
 if "button_value" not in st.session_state:
     st.session_state.button_value = False
+if "option" not in st.session_state:
+    st.session_state.option = ""
 
 # 1. Ask user to enter name
 st.header("Part 1 - Get name")
@@ -28,6 +30,7 @@ if st.session_state.name != "" and st.session_state.button_value == True:
 st.header("Part 3 - Display Name (Generated)")
 client = OpenAI()
 
+st.header("Part 4 - Greet the user")
 response = client.responses.create(
     model="gpt-4o",
     input=f"Greet {name} and make them welcome"
@@ -36,4 +39,17 @@ response = client.responses.create(
 st.write(response.output_text)
 
 # 4. User should be able to select different personas to be welcomed by
+st.header("Part 5 - Display Welcome based on Persona")
 
+st.session_state.option = st.selectbox(
+    "What persona?",
+    ("Shark", "Cow", "Formula 1 Driver")
+)
+
+response = client.responses.create(
+    model="gpt-4o",
+    instructions=f"You must respond as if you are a: {st.session_state.option}",
+    input=f"Greet {st.session_state.name} and make them welcome"
+)
+
+st.write(response.output_text)
